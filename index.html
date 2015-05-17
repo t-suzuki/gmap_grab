@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="lib/jquery-ui-1.11.4/jquery-ui.min.css">
 <script type="text/javascript" src="lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="lib/gmap3/js/jquery.gmap3.js"></script>
+<style type="text/css">
+body { padding: 16px; }
+</style>
 
 <script>
     function set_size(w, h) {
@@ -27,8 +30,7 @@
             longitude: gmap.center.lng(),
             zoom: gmap.zoom,
             navigationControl: true,
-            mapTypeControl: true,
-            scaleControl: true
+            mapTypeControl: true
         });
       }
     }
@@ -40,14 +42,17 @@
           mapTypeControl: true,
           scaleControl: true
       });
+      $("#gmap").bind('onMapReady', function() {
+        $("#gmap").data("gmap").setOptions({scrollwheel: false});
+      });
       $("#slider_w").slider({
         change: function(ev, ui) { set_size(ui.value, -1); },
       });
       $("#slider_h").slider({
         change: function(ev, ui) { set_size(-1, ui.value); },
       });
-      $("#slider_w").slider("value", 40);
-      $("#slider_h").slider("value", 40);
+      $("#slider_w").slider("value", 10);
+      $("#slider_h").slider("value", 10);
     });
 </script>
 
