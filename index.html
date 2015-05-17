@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="lib/jquery/jquery-2.1.4.min.js"></script>
+<link rel="stylesheet" href="lib/jquery-ui-1.11.4/jquery-ui.min.css">
+<script type="text/javascript" src="lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="lib/gmap3/js/jquery.gmap3.js"></script>
+
+<script>
+    function set_size(w, h) {
+      var scale = 50.0;
+      if (w > 0) {
+        $("#gmap").width(w*scale);
+        $("#width").text(w*scale);
+      }
+      if (h > 0) {
+        $("#gmap").height(h*scale);
+        $("#height").text(h*scale);
+      }
+      var gmap = $("#gmap").data("gmap");
+      if (gmap != undefined) {
+        $("#gmap").gmap3({
+            latitude: gmap.center.lat(),
+            longitude: gmap.center.lng(),
+            zoom: gmap.zoom,
+            navigationControl: true,
+            mapTypeControl: true,
+            scaleControl: true
+        });
+      }
+    }
+    $(function() {
+      $("#gmap").gmap3({
+          address: "東京都港区",
+          zoom: 11,
+          navigationControl: true,
+          mapTypeControl: true,
+          scaleControl: true
+      });
+      $("#slider_w").slider({
+        change: function(ev, ui) { set_size(ui.value, -1); },
+      });
+      $("#slider_h").slider({
+        change: function(ev, ui) { set_size(-1, ui.value); },
+      });
+      $("#slider_w").slider("value", 40);
+      $("#slider_h").slider("value", 40);
+    });
+</script>
+
+</head>
+<body>
+    <h1>Google map grabber</h1>
+    <div>W: <span id="width"></span>px<div id="slider_w"></div></div>
+    <div>H: <span id="height"></span>px<div id="slider_h"></div></div>
+    <div id="gmap"></div>
+</body>
+</html>
