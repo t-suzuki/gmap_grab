@@ -4,12 +4,22 @@
 <meta charset="utf-8" />
 
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
-<script src="lib/jquery/jquery-2.1.4.min.js"></script>
-<link rel="stylesheet" href="lib/jquery-ui-1.11.4/jquery-ui.min.css">
-<script type="text/javascript" src="lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.min.css" type="text/css" />
+
 <script type="text/javascript" src="lib/gmap3/js/jquery.gmap3.js"></script>
 <style type="text/css">
-body { padding: 16px; }
+body {
+    font-family: sans-serif;
+    background-color: #F0F8FA;
+}
+#detail {
+    font-size: small;
+}
+#gmap {
+    margin-top: 10px;
+}
 </style>
 
 <script>
@@ -35,6 +45,10 @@ body { padding: 16px; }
       }
     }
     $(function() {
+      $("#detail").accordion({
+          collapsible: true,
+          selector: "h1",
+      });
       $("#gmap").gmap3({
           address: "東京都港区",
           zoom: 11,
@@ -58,9 +72,21 @@ body { padding: 16px; }
 
 </head>
 <body>
-    <h1>Google map grabber</h1>
-    <div>W: <span id="width"></span>px<div id="slider_w"></div></div>
-    <div>H: <span id="height"></span>px<div id="slider_h"></div></div>
+    <div id="detail">
+        <h1>Google map grabber</h1>
+        <div>
+        <ol>
+            <li>set zoom level of the browser smaller. (&lt;Ctrl -&gt;)</li>
+            <li>set width and height using sliders below and detail level (zoom) using the slider in the map.</li>
+            <li>navigate to the location you wish to capture.</li>
+            <li>reset zoom level of the browser. (&lt;Ctrl 0&gt;)</li>
+            <li>capture the whole web page using browser extensions, such as Full Page Screen Capture (Chrome).</li>
+        </ol>
+        </div>
+    </div>
+    <div>Width: <span id="width"></span>px<div id="slider_w"></div></div>
+    <div>Height: <span id="height"></span>px<div id="slider_h"></div></div>
+    <hr/>
     <div id="gmap"></div>
 </body>
 </html>
