@@ -1,0 +1,3 @@
+[submodule "lib/gmap3"]
+	path = lib/gmap3
+	url = https://github.com/bumberboom/jquery.gmap3.git
